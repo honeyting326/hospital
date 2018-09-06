@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasxt.hospital.app.dao.DoctorDaoMapper">
+	<sql id="commsql">
+		SELECT doc.did,doc.*,d.dname FROM t_doctor doc JOIN
+		t_dept d
+		ON doc.did=d.did
+	</sql>
+	<select id="getDoctorInfo"
+        resultType="com.xasxt.hospital.app.bean.Doctor">
+        <include refid="commsql" />
+        where doc.docid=#{docid}
+    </select>
+
+	<select id="findDoctorWithPage"
+		resultType="com.xasxt.hospital.app.bean.Doctor">
+		<include refid="commsql" />
+		<where>
+			<if test="docname!=null">
+				doc.docname like '%${docname}%'
+			</if>
+		</where>
+		limit #{page},#{rows}
+	</select>
+
+	<select id="getDoctorCount" resultType="int">
+		select count(*)from
+		t_doctor
+	</select>
+	
+	<update id="delBatchDoctorInfo">
+    delete from t_doctor where docid in
+        <foreach item="item" index="index" collection="array" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <insert id="saveDoctorInfo">
+        insert into
+        t_doctor(docname,did,sex,tel,major,docdesc,remark)
+        values(#{docname},#{did},#{sex},#{tel},#{major},#{docdesc},'无')
+    </insert>
+    
+        <update id="delDoctorInfo">
+        delete from t_doctor where  docid=#{docid}
+    </update>
+    
+        <update id="updateDoctorInfo">
+        update t_doctor set docname=#{docname},did=#{did},
+        sex=#{sex},tel=#{tel},major=#{major},docdesc=#{docdesc}
+        where docid=#{docid}
+    </update>
+    
+    
+	
+	
+	
+	
+</mapper>

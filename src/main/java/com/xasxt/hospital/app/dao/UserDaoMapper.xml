@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasxt.hospital.app.dao.UserDaoMapper">
+	<sql id="commsql">
+		SELECT * FROM t_user u LEFT JOIN
+        t_user_role ur ON
+        u.uid=ur.uid
+        LEFT JOIN t_role r
+        ON r.rid=ur.rid
+	</sql>
+	<select id="login" resultMap="userMapper">
+		<include refid="commsql" />
+		where u.uname=#{uname}
+	</select>
+	
+	<resultMap type="com.xasxt.hospital.app.bean.User"
+        id="userMapper">
+        <id property="uid" column="UID" />
+        <result property="uname" column="UNAME" />
+        <result property="account" column="ACCOUNT" />
+        <collection property="listRole"
+            ofType="com.xasxt.hospital.app.bean.Role">
+            <id property="rid" column="RID" />
+            <result property="rname" column="RNAME" />
+            <result property="rdesc" column="RDESC" />
+        </collection>
+
+    </resultMap>
+
+
+</mapper>

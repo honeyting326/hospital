@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasxt.hospital.app.dao.DeptDaoMapper">
+	<sql id="commsql">
+		select * from t_dept
+	</sql>
+	<select id="findDeptWithPage" resultType="com.xasxt.hospital.app.bean.Dept">
+		<include refid="commsql" />
+		 <where> 
+		<if test="dname!=null and dname !=''">
+		dName like '%${dname}%'
+		</if>
+		</where> 
+		limit #{page},#{rows}
+	</select>
+	<select id="getDeptCount" resultType="int">
+		select count(*) from t_dept
+	</select>
+
+	<select id="getDeptInfo" resultType="com.xasxt.hospital.app.bean.Dept">
+		select * from t_dept where
+		dId=#{dId}
+	</select>
+
+	<update id="updateDeptInfo">
+		update t_dept set dName=#{dName},dDesc=#{dDesc} where
+		dId=#{dId}
+	</update>
+
+	<insert id="saveDeptInfo">
+		insert into
+		t_dept(dName,dDesc)values(#{dName},#{dDesc})
+	</insert>
+
+	<update id="delDeptInfo">
+		delete from t_dept where dId=#{dId}
+	</update>
+	
+	<select id="findDeptAllInfo" resultType="com.xasxt.hospital.app.bean.Dept">
+    <include refid="commsql"/>
+    </select>
+</mapper>

@@ -1,0 +1,13 @@
+server:
+  port: 8880
+
+mybatis:
+  mapper-locations: com/xasxt/hospital/app/dao/*.Mapper.xml
+logging:   #配置mybatissql日志输出
+  level:
+     com:
+       xasxt:
+         hospital:
+              app:
+                dao: TRACE
+    
