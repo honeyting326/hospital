@@ -43,13 +43,13 @@
                         </dl></li>
                         </s:hasAnyRoles>
                         
-                         <s:hasAnyRoles name="2">
-                        <li class="layui-nav-item"><a class="" href="javascript:;">患者信息管理</a>
+                         <s:hasAnyRoles name="3">
+                        <li class="layui-nav-item"><a class="" href="javascript:;">挂号信息管理</a>
                         <dl class="layui-nav-child">
                             <dd>
                                 <a href="javascript:;" data-id="3" data-title="患者挂号管理"
                                     data-url="jsp/patientList.jsp" class="site-demo-active"
-                                    data-type="tabAdd">患者挂号管理</a>
+                                    data-type="tabAdd">门诊挂号管理</a>
                             </dd>
 
 

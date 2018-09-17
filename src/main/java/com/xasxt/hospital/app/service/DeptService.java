@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xasxt.hospital.app.bean.Dept;
+import com.xasxt.hospital.app.bean.Doctor;
 import com.xasxt.hospital.app.dao.DeptDaoMapper;
 
 @Service
@@ -41,5 +42,8 @@ public class DeptService {
     }
     public List<Dept> findDeptAllInfo(){
         return deptDaoMapper.findDeptAllInfo();
+    }
+    public List<Doctor> findDoctorByDid(int did){
+        return deptDaoMapper.findDoctorByDid(did).getListDoctor();
     }
 }

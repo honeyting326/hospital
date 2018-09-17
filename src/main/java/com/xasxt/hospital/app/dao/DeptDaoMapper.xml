@@ -41,4 +41,22 @@
 	<select id="findDeptAllInfo" resultType="com.xasxt.hospital.app.bean.Dept">
     <include refid="commsql"/>
     </select>
+    
+   <select id="findDoctorByDid" resultMap="deptMapper">
+        SELECT * FROM t_dept d
+        LEFT JOIN t_doctor doc ON d.did=doc.`did`
+        WHERE d.did=#{did}
+
+    </select>
+    <resultMap type="com.xasxt.hospital.app.bean.Dept"
+        id="deptMapper">
+        <id property="dId" column="DID" />
+        <result property="dName" column="DNAME" />
+        <collection property="listDoctor"
+            ofType="com.xasxt.hospital.app.bean.Doctor">
+            <id property="docid" column="DOCID" />
+            <result property="docname" column="DOCNAME" />
+        </collection>
+    </resultMap>
+    
 </mapper>

@@ -1,6 +1,8 @@
 package com.xasxt.hospital.app.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dept implements  Serializable{
 	
@@ -8,7 +10,15 @@ public class Dept implements  Serializable{
 	private Integer dId;
 	private String dName;
 	private String dDesc;
-	public Integer getdId() {
+	private List<Doctor>listDoctor=new ArrayList<Doctor>();
+	
+	public List<Doctor> getListDoctor() {
+        return listDoctor;
+    }
+    public void setListDoctor(List<Doctor> listDoctor) {
+        this.listDoctor = listDoctor;
+    }
+    public Integer getdId() {
 		return dId;
 	}
 	public void setdId(Integer dId) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xasxt.hospital.app.bean.Dept;
+import com.xasxt.hospital.app.bean.Doctor;
 import com.xasxt.hospital.app.service.DeptService;
 
 @RestController
@@ -70,6 +71,12 @@ public class DeptController {
 	@RequestMapping("findDeptAllInfo")
     public List<Dept>findDeptAllInfo(){
         return deptService.findDeptAllInfo();
+    }
+	
+	@RequestMapping("findDoctorByDid")
+    public List<Doctor>findDoctorByDid(int did){
+        return deptService.findDoctorByDid(did);
+        
     }
 	
 }

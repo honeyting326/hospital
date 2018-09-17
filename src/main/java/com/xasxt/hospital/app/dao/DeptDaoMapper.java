@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.xasxt.hospital.app.bean.Dept;
+import com.xasxt.hospital.app.bean.Doctor;
 
 
 @Mapper
@@ -23,5 +24,7 @@ public interface DeptDaoMapper {
 	int saveDeptInfo(Dept dept);
 
 	int delDeptInfo(Integer dId);
+	
+	Dept findDoctorByDid(int did);
 
 }
