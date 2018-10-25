@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasxt.hospital.app.dao.DrugTypeDaoMapper">
+	
+	<select id="findDrugTypeWithPage" resultType="DrugType">
+		select * from t_drug_type
+		limit #{page},#{rows}
+	</select>
+	
+	<select id="getDrugTypeCount" resultType="int">
+	select count(*) from t_drug_type
+	</select>
+	
+	<select id="findDrugTypeAllInfo" resultType="DrugType">
+	select * from t_drug_type
+	</select>
+	
+	<insert id="saveDrugtypeInfo">
+	insert into t_drug_type
+	(drugtypname,drugtypdesc)
+	values(#{drugtypname},#{drugtypdesc})
+	</insert>
+	
+	<update id="delBatchDrugtypeInfo">
+    delete from t_drug_type where drugtypeid in
+        <foreach item="item" index="index" collection="array" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    
+     <update id="delDrugtypeInfo">
+        delete from t_drug_type where  drugtypeid=#{drugtypeid}
+    </update>
+    
+    <select id="getDrugtypeInfo" resultType="DrugType">
+    select * from t_drug_type where drugtypeid=#{drugtypeid}
+    </select>
+    
+    <update id="updateDrugtypeInfo">
+    update t_drug_type set
+    drugtypname=#{drugtypname},drugtypdesc=#{drugtypdesc}
+    where drugtypeid=#{drugtypeid}
+    </update>
+    
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasxt.hospital.app.dao.DrugDaoMapper">
+	<select id="findDrugWithPage" resultType="Drug">
+		select * from
+		t_drug d left join t_drug_type t
+		on d.drugtypeid=t.drugtypeid
+		
+		<where>
+		<if test="drugname!=null">
+		 d.drugname like '%${drugname}%'
+		</if>
+		<if test="drugtypename !=null">
+		AND  t.drugtypname like '%${drugtypename}%'
+		</if>
+		</where>
+		limit #{page},#{rows}
+	</select>
+
+	<select id="getDrugCount" resultType="int">
+		select count(*) from t_drug
+	</select>
+	
+	<insert id="saveDrugInfo">
+        insert into t_drug
+        (drugname,price,manufacturedate, manufacturer,
+        ddesc,remark,
+        drugtypeid,quantity)
+        values(#{drugname},#{price},#{manufacturedate},#{manufacturer},
+        #{ddesc},'无',
+        #{drugtypeid},#{quantity}
+        )
+    </insert>
+    
+     <update id="delDrugInfo">
+        delete from t_drug where  drugid=#{drugid}
+    </update>
+    <select id="getDrugInfo" resultType="Drug">
+    	select * from
+		t_drug d left join t_drug_type t
+		on d.drugtypeid=t.drugtypeid
+		where drugid=#{drugid}
+    </select>
+    
+    <update id="delBatchDrugInfo">
+    delete from t_drug where drugid in
+        <foreach item="item" index="index" collection="array" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    
+    <update id="updateDrugInfo">
+        update t_drug 
+        set drugname=#{drugname},ddesc=#{ddesc},
+        manufacturer=#{manufacturer},
+        drugtypeid=#{drugtypeid},quantity=#{quantity},
+        remark=#{remark}
+        where  drugid=#{drugid}
+    </update>
+    
+    
+    
+</mapper>

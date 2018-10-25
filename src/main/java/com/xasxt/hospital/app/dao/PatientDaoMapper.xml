@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xasxt.hospital.app.dao.PatientDaoMapper">
+	<insert id="savePatientInfo">
+        insert into t_patient
+        (pname,sex,age,tel,idcard,docid,did,
+        flagnum,money,opername,opertime,remark,pnum)
+        values(#{pname},#{sex},#{age},
+        #{tel},#{idcard},#{docid},#{did},#{flagnum},
+        #{money},#{opername},#{opertime},'无',#{pnum})
+    </insert>
+	
+	<sql id="commsql">
+        SELECT p.* ,d.docid,d.docname FROM t_patient p LEFT JOIN
+        t_doctor d
+        ON
+        p.docid=d.docid
+    </sql>
+    
+   <select id="findPatientWithPage"
+        resultType="Patient">
+        <include refid="commsql" />
+        <where>
+        <if test="pname!=null">
+        pname like '%${pname}%'
+        </if>
+        AND p.flag='0'
+        </where>
+        limit #{page},#{rows}
+    </select>
+    
+    <select id="getPatientCount" resultType="int">
+        select count(pid)from
+        t_patient
+    </select>
+    
+    <update id="updatePatientInfo">
+        update t_patient
+        <set>
+            <if test="pname!=null">
+                pname=#{pname},
+            </if>
+            <if test="sex!=null">
+                sex=#{sex},
+            </if>
+            <if test="pname !=null">
+                pname=#{pname},
+            </if>
+            <if test="tel !=null">
+                tel=#{tel},
+            </if>
+            <if test="idcard !=null">
+                idcard=#{idcard},
+            </if>
+            <if test="docid !=null">
+                docid=#{docid},
+            </if>
+            <if test="flagnum !=null">
+                flagnum=#{flagnum},
+            </if>
+            <if test="money !=null">
+                money=#{money},
+            </if>
+            <if test="money !=null">
+                opername=#{opername},
+            </if>
+            <if test="opertime !=null">
+                opertime=#{opertime},
+            </if>
+            <if test="pnum !=null">
+                pnum=#{pnum},
+            </if>
+            <if test="did !=null">
+                did=#{did},
+            </if>
+            <if test="flag !=null">
+                flag=#{flag},
+            </if>
+            remark='无'
+        </set>
+        where
+        pid=#{pid}
+    </update>
+
+    <update id="delPatientInfo">
+        delete from t_patient where pid=#{pid}
+    </update>
+
+    <update id="delBatchPatientInfo">
+        delete from t_patient where pid in
+        <foreach item="item" index="index" collection="array" open="("
+            separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+	
+</mapper>
