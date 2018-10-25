@@ -45,14 +45,6 @@ public class DrugTypeController {
 	
 	@RequestMapping("delBatchDrugtypeInfo")
 	public boolean delBatchDrugtypeInfo(@RequestParam("drugtypeids[]")String drugtypeids[]){			
-//		boolean flag=false;
-//		if(drugtypeids.length!=0){
-//			for(Integer drugtypeid:drugtypeids){
-//				flag=drugTypeService.delBatchDrugtypeInfo(drugtypeid);
-//			}
-//		}
-		
-//		return flag;
 		return drugTypeService.delBatchDrugtypeInfo(drugtypeids);
 	}
 	
