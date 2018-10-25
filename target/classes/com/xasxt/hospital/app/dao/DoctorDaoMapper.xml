@@ -54,9 +54,5 @@
         where docid=#{docid}
     </update>
     
-    
-	
-	
-	
 	
 </mapper>

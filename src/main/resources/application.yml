@@ -3,6 +3,7 @@ server:
 
 mybatis:
   mapper-locations: com/xasxt/hospital/app/dao/*.Mapper.xml
+  type-aliases-package: com.xasxt.hospital.app.bean
 logging:   #配置mybatissql日志输出
   level:
      com:

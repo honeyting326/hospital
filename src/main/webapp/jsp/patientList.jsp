@@ -29,7 +29,7 @@
         </button>
 </div>
 
-    <table id="dg" lay-filter="demo"></table>
+   <table id="dg" lay-filter="demo"></table> 
     
     
     
@@ -143,7 +143,7 @@
 <div class="layui-form-item">
     <label class="layui-form-label">科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;室</label>
     <div class="layui-input-block">
-      <select name="dname" lay-verify="required"  id="did" lay-filter="dept-name">
+      <select name="did" lay-verify="required"  id="did" lay-filter="dept-name">
         <option value="">请选择科室</option>
       </select>
     </div>
@@ -196,6 +196,9 @@
                     field : 'pnum',
                     title : '挂号码',
                 },  {
+                    field : 'did',
+                    title : '科室',
+                }, {
                     field : 'pname',
                     title : '患者名称',
                 }, {
@@ -332,6 +335,8 @@
                     return false;
                 }
             })
+            
+            
          
 
             $("#add-patientnum-button").click(function() {
@@ -341,6 +346,7 @@
                     title : '添加挂号信息',
                     content : $("#add-patientnum-form").html()
                 });
+                
                 $.post('../findDeptAllInfo', function(data) {
                     for ( var i in data) {
                         $("#did").append(

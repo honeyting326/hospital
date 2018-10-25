@@ -39,6 +39,18 @@
                                     data-url="jsp/doctorList.jsp" class="site-demo-active"
                                     data-type="tabAdd">医生信息管理</a>
                             </dd>
+                            
+                             <dd>
+                                <a href="javascript:;" data-id="6" data-title="药品类别管理"
+                                    data-url="jsp/drugTypeList.jsp" class="site-demo-active"
+                                    data-type="tabAdd">药品类别管理</a>
+                            </dd>
+                            
+                             <dd>
+                                <a href="javascript:;" data-id="7" data-title="药品信息管理"
+                                    data-url="jsp/drugList.jsp" class="site-demo-active"
+                                    data-type="tabAdd">药品信息管理</a>
+                            </dd>
 
                         </dl></li>
                         </s:hasAnyRoles>

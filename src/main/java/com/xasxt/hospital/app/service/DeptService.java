@@ -46,4 +46,5 @@ public class DeptService {
     public List<Doctor> findDoctorByDid(int did){
         return deptDaoMapper.findDoctorByDid(did).getListDoctor();
     }
+  
 }

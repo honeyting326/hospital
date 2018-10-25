@@ -21,6 +21,7 @@ public interface DoctorDaoMapper {
 	int saveDoctorInfo(Doctor Doctor);
 
 	int delDoctorInfo(Integer docid);
+	
 	int delBatchDoctorInfo(String[] docids);
 
 }
