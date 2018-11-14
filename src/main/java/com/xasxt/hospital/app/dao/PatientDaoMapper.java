@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.xasxt.hospital.app.bean.Consultation;
+import com.xasxt.hospital.app.bean.DrugPrescriptions;
 import com.xasxt.hospital.app.bean.Patient;
 
 @Mapper
@@ -24,5 +26,17 @@ public interface PatientDaoMapper {
     
 
     int updatePatientInfo(Patient patient);
+    
+    int getPatientSubmitCount(Map<String,Object>map);
+    
+    List<Patient>findPatientSubmitWithPage(Map<String,Object>map);
+    
+    int saveConsultationInfo(Consultation consultation);
+    
+    int savePatientDrugInfo(DrugPrescriptions drugPrescriptions);
+    
+    int getDrugDetailedCount(Map<String,Object>map);
+    
+    List<DrugPrescriptions> findDrugDetailedWithPage(Map<String, Object> map);
     
 }

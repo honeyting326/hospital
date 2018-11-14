@@ -1,5 +1,4 @@
 package com.xasxt.hospital.app.web;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,12 +20,12 @@ public class DrugController {
 	private DrugService    drugService;
 	
 	@RequestMapping("findDrugWithPage")
-	public Map<String,Object>findDrugWithPage(int page ,int limit,String drugname,String drugtypename){
+	public Map<String,Object>findDrugWithPage(int page ,int limit,String drugname,String drugtypname){
 		Map<String,Object>  map=new HashMap<String,Object>();
 		map.put("page", (page-1)*limit);
 		map.put("rows", limit);
 		map.put("drugname", drugname);
-		map.put("drugtypename", drugtypename);
+		map.put("drugtypname", drugtypname);
 		Map<String,Object>  result=new HashMap<String,Object>();
 		result.put("code", 0);
 		result.put("msg", "");

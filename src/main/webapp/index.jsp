@@ -68,6 +68,21 @@
                         </dl></li>
                         </s:hasAnyRoles>
                         
+                        <s:hasAnyRoles name="1">
+                         <li class="layui-nav-item"><a class="" href="javascript:;">待诊患者信息</a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;" data-id="8" data-title=">待诊患者信息"
+                                        data-url="jsp/patientsubmitList.jsp" class="site-demo-active"
+                                        data-type="tabAdd">>待诊患者信息</a>
+                                </dd>
+                                
+                     
+                            </dl>      
+                            </li>
+                    </s:hasAnyRoles>
+                        
+                        
                         <s:hasAnyRoles name="0">
                         <li class="layui-nav-item"><a class="" href="javascript:;">系统信息管理</a>
                             <dl class="layui-nav-child">

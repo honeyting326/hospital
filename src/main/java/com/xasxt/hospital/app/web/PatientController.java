@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xasxt.hospital.app.bean.Consultation;
+import com.xasxt.hospital.app.bean.DrugPrescriptions;
 import com.xasxt.hospital.app.bean.Patient;
 import com.xasxt.hospital.app.bean.User;
 import com.xasxt.hospital.app.service.PatientService;
@@ -89,4 +91,47 @@ public class PatientController {
         return patientService.updatePatientInfo(patient);
         
     }
+    
+    @RequestMapping("findPatientSubmitWithPage")
+	public   Map<String,Object>  findPatientSubmitWithPage(int page ,int limit,String pname,String docname){
+		Map<String,Object>map=new HashMap<String,Object>();
+		map.put("page", (page-1)*limit);
+		map.put("rows", limit);
+		map.put("pname", pname);
+		map.put("docname", docname);
+		Map<String,Object>results=new HashMap<String,Object>();
+		results.put("msg", "");
+		results.put("code", 0);
+		results.put("count", patientService.getPatientSubmitCount(map));
+		results.put("data", patientService.findPatientSubmitWithPage(map));
+		return results;
+	}
+    
+    @RequestMapping("saveConsultationInfo")
+	public boolean saveConsultationInfo(Consultation consultation){
+		consultation.setConsultationtime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		return patientService.saveConsultationInfo(consultation);
+		
+	}
+    
+	@RequestMapping("savePatientDrugInfo")
+	public   boolean savePatientDrugInfo(DrugPrescriptions   drugPrescriptions){
+		return patientService.savePatientDrugInfo(drugPrescriptions);
+	}
+
+	
+	@RequestMapping("findDrugDetailedWithPage")
+	public Map<String,Object>findDrugDetailedWithPage(int page ,int limit,Integer patientid){
+		Map<String,Object>map=new HashMap<String,Object>();
+		map.put("page", (page-1)*limit);
+		map.put("rows", limit);
+		map.put("patientid", patientid);
+		Map<String,Object>results=new HashMap<String,Object>();
+		results.put("msg", "");
+		results.put("code", 0);
+		results.put("count", patientService.getDrugDetailedCount(map));
+		results.put("data", patientService.findDrugDetailedWithPage(map));
+		return results;
+	}
+	
 }

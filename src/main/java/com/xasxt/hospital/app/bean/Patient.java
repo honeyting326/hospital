@@ -21,8 +21,15 @@ public class Patient implements Serializable {
 	private String opertime;
 	private String flag;
 	private String remark;
+	private String result;
 	
 	
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
 	public Integer getDid() {
         return did;
     }

@@ -95,5 +95,69 @@
             #{item}
         </foreach>
     </update>
+    
+     <select id="getPatientSubmitCount" resultType="int">
+        select count(pid)from
+        t_patient where flag=1
+    </select>
+    
+    <select id="findPatientSubmitWithPage" resultType="Patient">
+		SELECT p.* ,d.docid,d.docname,de.did,de.dname,c.result FROM
+		t_patient p
+		LEFT
+		JOIN
+		t_doctor d
+		ON
+		p.docid=d.docid
+		left join t_dept de
+		on
+		p.did=de.did
+		left join t_consultation c
+		on c.patientid=p.pid
+		<where>
+		
+			<if test="pname!=null">
+				pname like '%${pname}%'
+			</if>
+		
+	
+			<if test="docname!=null">
+			or	docname like '%${docname}%'
+			</if>
+	
+		
+			
+			AND p.flag='1'
+		</where>
+		limit #{page},#{rows}
+	</select>
+	<insert id="saveConsultationInfo">
+		insert into t_consultation
+        (patientid,docid,result,consultationtime,remark,ishospital)
+        values(#{patientid},#{docid},#{result},
+        #{consultationtime},#{remark},#{ishospital})
+	
+	</insert>
+	
+	<insert id="savePatientDrugInfo">
+		insert into
+		t_drug_prescriptions(drugid,patientid,quantitys)values
+		(#{drugid},#{patientid},#{quantitys})
+	</insert>
+	
+	<select id="getDrugDetailedCount" resultType="int">
+	 select count(drugid)from t_drug_prescriptions
+	</select>
+	
+	<select id="findDrugDetailedWithPage" resultType="DrugPrescriptions">
+	select * from t_drug_prescriptions dp 
+	left join t_drug d 
+	on dp.drugid=d.drugid
+	left join t_patient p
+		on dp.patientid= p.pid
+		where p.pid=#{patientid}
+		limit #{page},#{rows}
+	</select>
+	
 	
 </mapper>

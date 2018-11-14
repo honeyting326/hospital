@@ -12,8 +12,8 @@
 		<if test="drugname!=null">
 		 d.drugname like '%${drugname}%'
 		</if>
-		<if test="drugtypename !=null">
-		AND  t.drugtypname like '%${drugtypename}%'
+		<if test="drugtypname !=null">
+		AND  t.drugtypname like '%${drugtypname}%'
 		</if>
 		</where>
 		limit #{page},#{rows}

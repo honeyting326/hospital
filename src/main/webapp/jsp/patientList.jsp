@@ -27,6 +27,10 @@
             id="delBatch-button">
             <i class="layui-icon">&#xe640;</i>批量删除
         </button>
+         <button class="layui-btn layui-btn-warm" type="button"
+            id="submit-button">
+            <i class="layui-icon">&#xe641;</i>提交
+        </button>
 </div>
 
    <table id="dg" lay-filter="demo"></table> 
@@ -195,10 +199,7 @@
                 }, {
                     field : 'pnum',
                     title : '挂号码',
-                },  {
-                    field : 'did',
-                    title : '科室',
-                }, {
+                },   {
                     field : 'pname',
                     title : '患者名称',
                 }, {
@@ -265,6 +266,32 @@
                     })
                 }
             })
+            
+            
+            
+            
+             //提交挂号信息
+            $("#submit-button").click(function() {
+                var dg = table.checkStatus('dg');
+                var array=dg.data;
+                if (array.length==0) {
+                    layer.msg('请选择要提交的数据');
+                } else if(array.length>1) {
+                    layer.msg('只能选择一条数据进行提交');
+                } else{
+                    $.post('../updatePatientInfo', {
+                        pid:array[0].pid,flag:'1'
+                    }, function(flag) {
+                        if (flag) {
+                            layer.msg('提交成功');
+                            table.reload("dg",{})
+                        } else {
+                            layer.msg('提交失败'); 
+                        }
+    					})
+    				}
+    				
+    			})
             
             
             table.on('tool(demo)', function(obj) {
